@@ -13,48 +13,54 @@ namespace MobileAppStart
     public partial class SliderPage : ContentPage
     {
         Label lbl;
-        Button btn;
-        Stepper sp;
-        Slider sl;
+        Slider sld;
+        Stepper stp;
+
         public SliderPage()
         {
-            lbl = new Label();
-            sl = new Slider()
+            lbl = new Label
+            {
+                Text = "...",
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+            sld = new Slider
             {
                 Minimum = 0,
                 Maximum = 100,
                 Value = 30,
-                MinimumTrackColor = Color.Blue,
-                MaximumTrackColor = Color.Violet,
-                
+                MinimumTrackColor = Color.Red,
+                MaximumTrackColor = Color.Black,
+                ThumbColor = Color.Red,
             };
-            sl.ValueChanged += Sl_ValueChanged;
-            sp = new Stepper()
+            sld.ValueChanged += Sld_ValueChanged;
+            stp = new Stepper
             {
                 Minimum = 0,
-                Maximum = 5,
-                Value = 3,
+                Maximum = 100,
+                Increment = 1,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.EndAndExpand
             };
-            sp.ValueChanged += Sp_ValueChanged;
-
-            StackLayout st = new StackLayout()
+            stp.ValueChanged += Stp_ValueChanged;
+            StackLayout st = new StackLayout
             {
-                Children = { lbl, sl, sp }
+                Children = { sld, lbl, stp }
             };
             Content = st;
         }
 
-        private void Sp_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void Stp_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            lbl.Text = String.Format("Chosen: {0:F1}", e.NewValue);
-            lbl.FontSize = e.NewValue * 10;
+            lbl.Text = String.Format("Valitud {0:F1}", e.NewValue);
+            lbl.FontSize = e.NewValue;
+            lbl.Rotation = e.NewValue;
         }
 
-        private void Sl_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void Sld_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            lbl.Text = String.Format("Chosen: {0:F1}", e.NewValue);
+            lbl.Text = String.Format("Valitud: {0:F1}", e.NewValue);
+            lbl.FontSize = e.NewValue;
             lbl.Rotation = e.NewValue;
         }
     }

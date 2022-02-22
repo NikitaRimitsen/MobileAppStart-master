@@ -143,5 +143,8 @@ namespace MobileAppStart
             btn2.BackgroundColor = Color.White;
 
         }
+
+
+
     }
 }

@@ -12,73 +12,54 @@ namespace MobileAppStart
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Date : ContentPage
     {
-        bool a = false;
-        TimePicker t;
         Label lbl;
-        DatePicker date;
-        Button btn;
+        DatePicker dp;
+        TimePicker tp;
+
         public Date()
         {
-            lbl = new Label { Text = "Choose a date" };
-            date = new DatePicker
+            lbl = new Label
+            {
+                Text = "Vali mingi kuupäev",
+                BackgroundColor = Color.BurlyWood
+            };
+            dp = new DatePicker
             {
                 Format = "D",
-                MinimumDate = DateTime.Now.AddDays(-7),
-                MaximumDate = DateTime.Now.AddDays(7),
+                MinimumDate = DateTime.Now.AddDays(-5),
+                MaximumDate = DateTime.Now.AddDays(5),
+                TextColor = Color.Red
             };
-            date.DateSelected += Date_DateSelected;
-            t = new TimePicker()
+            dp.DateSelected += Dp_DateSelected;
+            tp = new TimePicker
             {
-                Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0),
-                
+                Time = new TimeSpan(12, 0, 0)
             };
+            tp.PropertyChanged += Tp_PropertyChanged;
 
-            t.PropertyChanged += T_PropertyChanged;
-            btn = new Button()
+            AbsoluteLayout abs = new AbsoluteLayout
             {
-                Text = "Set Timer, kinda"
+                Children = { lbl, dp, tp }
             };
-            AbsoluteLayout abs = new AbsoluteLayout 
-            {
-                Children = {lbl, btn, date, t},
-            };
-            btn.Clicked += Btn_Clicked;
-            AbsoluteLayout.SetLayoutBounds(lbl, new Rectangle(0.1, 0.2, 300, 20));
+            AbsoluteLayout.SetLayoutBounds(lbl, new Rectangle(0.1, 0.2, 200, 50));
             AbsoluteLayout.SetLayoutFlags(lbl, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(btn, new Rectangle(0.1, 0.3, 300, 20));
-            AbsoluteLayout.SetLayoutFlags(btn, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(date, new Rectangle(0.1, 0.4, 300, 50));
-            AbsoluteLayout.SetLayoutFlags(date, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(t, new Rectangle(0.1, 0.6, 300, 50));
-            AbsoluteLayout.SetLayoutFlags(t, AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(dp, new Rectangle(0.1, 0.5, 300, 50));
+            AbsoluteLayout.SetLayoutFlags(dp, AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(tp, new Rectangle(0.5, 0.7, 200, 50));
+            AbsoluteLayout.SetLayoutFlags(tp, AbsoluteLayoutFlags.PositionProportional);
             Content = abs;
         }
 
-        private void Btn_Clicked(object sender, EventArgs e)
+
+
+        private void Tp_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            currentTime1(t.Time.ToString());
+            lbl.Text = "Oli valitud aeg" + tp.Time;
         }
 
-        private void T_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Dp_DateSelected(object sender, DateChangedEventArgs e)
         {
-            lbl.Text = "Time choosen: " + t.Time;
-        }
-        private async void currentTime1(string ti)
-        {
-            while (true)
-            {
-                if (ti == DateTime.Now.ToString("T"))
-                {
-                    lbl.BackgroundColor = Color.Red;
-                    break;
-                }
-                Console.WriteLine("Working");
-                await Task.Delay(1000);
-            }
-        }
-        private void Date_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            lbl.Text = "Date choosen: " + e.NewDate.ToString("G"); 
+            lbl.Text = "Oli valitud kuupaev" + e.NewDate.ToString("G");
         }
     }
 }

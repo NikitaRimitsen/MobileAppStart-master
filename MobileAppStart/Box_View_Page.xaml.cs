@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace MobileAppStart
 {
@@ -21,12 +22,13 @@ namespace MobileAppStart
         public Box_View_Page()
         {
             int r = 0, g = 0, b = 0;
-            
+
             box = new BoxView
             {
 
                 CornerRadius = 200,
-                WidthRequest = 300, HeightRequest = 300,
+                WidthRequest = 300,
+                HeightRequest = 300,
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 BackgroundColor = Color.Red
@@ -36,8 +38,8 @@ namespace MobileAppStart
             {
                 Text = "Punkti: " + i.ToString(),
                 TextColor = Color.Black,
-                HorizontalOptions=LayoutOptions.Center,
-                VerticalOptions=LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
                 FontSize = 30
             };
 
@@ -55,24 +57,28 @@ namespace MobileAppStart
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += Tap_Tapped;
             box.GestureRecognizers.Add(tap);
-            StackLayout st = new StackLayout { Children = { 
+            StackLayout st = new StackLayout
+            {
+                Children = {
                     lb,
-                    btn, 
-                    box 
-                } };
+                    btn,
+                    box
+                }
+            };
             Content = st;
             st.BackgroundColor = Color.PeachPuff;
         }
 
         private void Btn_Clicked(object sender, EventArgs e)
         {
-            if (i>100)
+            if (i >= 100)
             {
                 i = i - 100;
                 l = 1;
                 lb.Text = "Punkti: " + i.ToString();
+                btn.IsVisible = false;
             }
-            else{ }
+            else { }
         }
 
         Random rnd;
@@ -82,15 +88,17 @@ namespace MobileAppStart
             box.Color = Color.FromRgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));*/
             if (l != 1)
             {
-                
+                var duration = TimeSpan.FromSeconds(0.15);
+                Vibration.Vibrate(duration);
                 i++;
                 lb.Text = "Punkti: " + i.ToString();
             }
             else
             {
-                i +=2;
+                i += 2;
                 lb.Text = "Punkti: " + i.ToString();
-                btn.IsVisible = false;
+                var duration = TimeSpan.FromSeconds(0.15);
+                Vibration.Vibrate(duration);
             }
 
         }

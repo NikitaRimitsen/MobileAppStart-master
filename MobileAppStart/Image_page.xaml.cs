@@ -12,28 +12,46 @@ namespace MobileAppStart
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Image_page : ContentPage
     {
+        Switch sw;
         Image img;
         public Image_page()
         {
-            img = new Image { Source = "images.jpg" };
-            Switch ns = new Switch 
+            img = new Image { Source = "cat.jpg" };
+            TapGestureRecognizer tap = new TapGestureRecognizer();
+            tap.Tapped += Tap_Tapped;
+            tap.NumberOfTapsRequired = 1;
+            img.GestureRecognizers.Add(tap);
+            sw = new Switch
             {
                 IsToggled = true,
                 VerticalOptions = LayoutOptions.EndAndExpand,
                 HorizontalOptions = LayoutOptions.Center
             };
-            ns.Toggled += Ns_Toggled;
-            StackLayout st = new StackLayout
+            sw.Toggled += Sw_Toggled;
+            this.Content = new StackLayout { Children = { img, sw } };
+        }
+        int tapid;
+        private void Tap_Tapped(object sender, EventArgs e)
+        {
+            tapid++;
+            var imagesender = (Image)sender;
+            if (tapid % 2 == 0)
             {
-                Children = { img, ns },
-            };
-            Content = st;
-            
+                img.Source = "cat2.jpg";
+            }
+            else { img.Source = "cat.jpg"; }
         }
 
-        private void Ns_Toggled(object sender, ToggledEventArgs e)
+        private void Sw_Toggled(object sender, ToggledEventArgs e)
         {
-            img.IsVisible = !(img.IsVisible); //e.value works, ns.IsToggled
+            if (e.Value)
+            {
+                img.IsVisible = true;
+            }
+            else
+            {
+                img.IsVisible = false;
+            }
         }
     }
 }
