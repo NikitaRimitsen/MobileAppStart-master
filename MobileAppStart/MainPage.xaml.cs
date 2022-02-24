@@ -57,12 +57,17 @@ namespace MobileAppStart
             imgbtn.Clicked += imgbtn_Clicked;
             Button trafficbtn = new Button()
             {
-                Text = "Traffic",
+                Text = "Valgusfoor",
                 BackgroundColor = Color.SandyBrown
             };
             trafficbtn.Clicked += trafficbtn_Clicked;
+            Button rgbbtn = new Button()
+            {
+                Text = "RGB",
+                BackgroundColor = Color.SandyBrown
+            };
+            rgbbtn.Clicked += Rgbbtn_Clicked;
 
-            
             //st = {b,timer}
             st.Children.Add(b);
             st.Children.Add(timer_b);
@@ -72,10 +77,17 @@ namespace MobileAppStart
             st.Children.Add(framebtn);
             st.Children.Add(imgbtn);
             st.Children.Add(trafficbtn);
+            st.Children.Add(rgbbtn);
             st.BackgroundColor = Color.Cornsilk;
             Content = st;
             b.Clicked += B_Clicked;
         }
+
+        private async void Rgbbtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RGB_View());
+        }
+
         private async void trafficbtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Svetofor());

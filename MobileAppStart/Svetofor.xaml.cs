@@ -12,51 +12,15 @@ namespace MobileAppStart
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Svetofor : ContentPage
     {
-        BoxView re;
-        BoxView yello;
-        BoxView gree;
         Button vkl;
         Button vekl;
-        Label redpunane;
-        Label yellokollane;
-        Label greeroheline;
+        Label redpunane, yellokollane, greeroheline;
+        Frame red;
+        Frame yellow;
+        Frame green;
         int nazata = 0;
         public Svetofor()
         {
-
-            re = new BoxView
-            {
-
-                CornerRadius = 100,
-                WidthRequest = 200,
-                HeightRequest = 150,
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                BackgroundColor = Color.Gray,
-            };
-
-            yello = new BoxView
-            {
-
-                CornerRadius = 100,
-                WidthRequest = 200,
-                HeightRequest = 150,
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                BackgroundColor = Color.Gray,
-                
-
-            };
-            gree = new BoxView
-            {
-
-                CornerRadius = 100,
-                WidthRequest = 200,
-                HeightRequest = 150,
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                BackgroundColor = Color.Gray,
-            };
             vkl = new Button
             {
                 Text = "Sisse",
@@ -75,28 +39,66 @@ namespace MobileAppStart
 
             redpunane = new Label()
             {
-                Text = "Punane",
+                Text = "",
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 TextColor = Color.Black,
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
             };
 
             yellokollane = new Label()
             {
-                Text = "Kollane",
+                Text = "",
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 TextColor = Color.Black,
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
             };
 
             greeroheline = new Label()
             {
-                Text = "Roheline",
+                
+                Text = "",
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                 TextColor = Color.Black,
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
             };
-            StackLayout texti = new StackLayout
+
+
+
+            red = new Frame
             {
-                Children = { re, redpunane, yello, yellokollane, gree, greeroheline }
+                Content = redpunane,
+                BackgroundColor = Color.Gray,
+                HeightRequest = 200,
+                CornerRadius = 100,
+                Margin = 10,
+                VerticalOptions = LayoutOptions.FillAndExpand,
             };
+
+            yellow = new Frame
+            {
+                Content = yellokollane,
+                BackgroundColor = Color.Gray,
+                HeightRequest = 200,
+                CornerRadius = 100,
+                Margin = 10,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+            };
+
+            green = new Frame
+            {
+                Content = greeroheline,
+                BackgroundColor = Color.Gray,
+                HeightRequest = 200,
+                CornerRadius = 100,
+                Margin = 10,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+            };
+
+
+            //--------------------------------------------------
 
             FlexLayout knopki = new FlexLayout
             {
@@ -105,17 +107,16 @@ namespace MobileAppStart
             };
             StackLayout st = new StackLayout
             {
-                Children = { texti, knopki }
+                Children = { red, yellow, green, knopki }
             };
 
             //------------Кликать на box---------------
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += Tap_Tapped;
-            re.GestureRecognizers.Add(tap);
-            yello.GestureRecognizers.Add(tap);
-            gree.GestureRecognizers.Add(tap);
+            red.GestureRecognizers.Add(tap);
+            yellow.GestureRecognizers.Add(tap);
+            green.GestureRecognizers.Add(tap);
             //---------------------------
-
             Content = st;
             st.BackgroundColor = Color.PeachPuff;
 
@@ -126,13 +127,15 @@ namespace MobileAppStart
 
             nazata = 1;
 
-                re.BackgroundColor = Color.Gray;
-                re.Opacity = 1;
-                yello.BackgroundColor = Color.Gray;
-                yello.Opacity = 1;
-                gree.BackgroundColor = Color.Gray;
-                gree.Opacity = 1;
-
+                red.BackgroundColor = Color.Gray;
+                red.Opacity = 1;
+                yellow.BackgroundColor = Color.Gray;
+                yellow.Opacity = 1;
+                green.BackgroundColor = Color.Gray;
+                green.Opacity = 1;
+                redpunane.Text = "";
+                yellokollane.Text = "";
+                greeroheline.Text = "";
 
         }
 
@@ -141,50 +144,53 @@ namespace MobileAppStart
             nazata = 0;
             if (nazata == 1)
             {
-
+                
             }
             else
             {
+                redpunane.Text = "Stop";
+                yellokollane.Text = "Ootama";
+                greeroheline.Text = "Minna";
                 while (nazata != 1)
                 {
                     if (nazata == 0)
                     {
-                        re.BackgroundColor = Color.Red;
-                        re.Opacity = 1;
-                        yello.BackgroundColor = Color.Yellow;
-                        yello.Opacity = .2;
-                        gree.BackgroundColor = Color.Green;
-                        gree.Opacity = .2;
+                        red.BackgroundColor = Color.Red;
+                        red.Opacity = 1;
+                        yellow.BackgroundColor = Color.Yellow;
+                        yellow.Opacity = .2;
+                        green.BackgroundColor = Color.Green;
+                        green.Opacity = .2;
                         await Task.Delay(3000);
                     }
                     if (nazata == 0)
                     {
-                        re.BackgroundColor = Color.Red;
-                        re.Opacity = .2;
-                        yello.BackgroundColor = Color.Yellow;
-                        yello.Opacity = 1;
-                        gree.BackgroundColor = Color.Green;
-                        gree.Opacity = .2;
+                        red.BackgroundColor = Color.Red;
+                        red.Opacity = .2;
+                        yellow.BackgroundColor = Color.Yellow;
+                        yellow.Opacity = 1;
+                        green.BackgroundColor = Color.Green;
+                        green.Opacity = .2;
                         await Task.Delay(1000);
                     }
                     if (nazata == 0)
                     {
-                        re.BackgroundColor = Color.Red;
-                        re.Opacity = .2;
-                        yello.BackgroundColor = Color.Yellow;
-                        yello.Opacity = .2;
-                        gree.BackgroundColor = Color.Green;
-                        gree.Opacity = 1;
+                        red.BackgroundColor = Color.Red;
+                        red.Opacity = .2;
+                        yellow.BackgroundColor = Color.Yellow;
+                        yellow.Opacity = .2;
+                        green.BackgroundColor = Color.Green;
+                        green.Opacity = 1;
                         await Task.Delay(3000);
                     }
                     if (nazata == 0)
                     {
-                        re.BackgroundColor = Color.Red;
-                        re.Opacity = .2;
-                        yello.BackgroundColor = Color.Yellow;
-                        yello.Opacity = 1;
-                        gree.BackgroundColor = Color.Green;
-                        gree.Opacity = .2;
+                        red.BackgroundColor = Color.Red;
+                        red.Opacity = .2;
+                        yellow.BackgroundColor = Color.Yellow;
+                        yellow.Opacity = 1;
+                        green.BackgroundColor = Color.Green;
+                        green.Opacity = .2;
                         await Task.Delay(1000);
                     }
                 }
@@ -196,19 +202,29 @@ namespace MobileAppStart
         int i = 0;
         private void Tap_Tapped(object sender, EventArgs e)
         {
-            if (i == 0)
+            if (nazata == 0)
             {
-                redpunane.Text = "Stop";
-                yellokollane.Text = "Ootama";
-                greeroheline.Text = "Minna";
-                i++;
+                if (i == 0)
+                {
+                    redpunane.Text = "Punane";
+                    yellokollane.Text = "Kollane";
+                    greeroheline.Text = "Roheline";
+                    i++;
+                }
+                else if (i == 1)
+                {
+                    
+                    redpunane.Text = "Stop";
+                    yellokollane.Text = "Ootama";
+                    greeroheline.Text = "Minna";
+                    i = 0;
+                }
             }
-            else if (i == 1)
+            else
             {
-                redpunane.Text = "Punane";
-                yellokollane.Text = "Kollane";
-                greeroheline.Text = "Roheline";
-                i = 0;
+                redpunane.Text = "";
+                yellokollane.Text = "";
+                greeroheline.Text = "";
             }
         }
     }

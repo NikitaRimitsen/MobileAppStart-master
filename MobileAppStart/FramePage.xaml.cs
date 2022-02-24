@@ -22,7 +22,8 @@ namespace MobileAppStart
             lbl = new Label
             {
                 Text = "Raami kujundus",
-                FontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label))
+                FontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)),
+                TextColor = Color.Black,
             };
             gr = new Grid
             {
