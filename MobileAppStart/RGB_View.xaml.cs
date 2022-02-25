@@ -18,88 +18,154 @@ namespace MobileAppStart
         int reint = 0;
         int greeint = 0;
         int bluint = 0;
+        Button randombtn;
+        Random rnd = new Random();
 
         public RGB_View()
         {
             tere = new Label
             {
-                Text = "R: " + reint,
+                Text = "R = " + reint,
                 FontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)),
                 TextColor = Color.Black,
+                Padding = 20,
             };
 
             tegree = new Label
             {
-                Text = "Raami kujundus",
+                Text = "G = " + greeint,
                 FontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)),
                 TextColor = Color.Black,
+                Padding = 20,
             };
 
             teblu = new Label
             {
-                Text = "Raami kujundus",
+                Text = "B = " + bluint,
                 FontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)),
                 TextColor = Color.Black,
-            };
+                Padding = 20,
+        };
             fr = new Frame
             {
-                BorderColor = Color.FromRgb(0, 0, 0),
-                CornerRadius = 20,
+
+                BorderColor = Color.Black,
+                CornerRadius = 0,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             sldre = new Slider
             {
                 Minimum = 0,
                 Maximum = 255,
-                Value = 30,
+                Value = 0,
                 MinimumTrackColor = Color.Red,
                 MaximumTrackColor = Color.Black,
                 ThumbColor = Color.Red,
-                Margin = 20
+                //Margin = 20
             };
             sldre.ValueChanged += Sldre_ValueChanged;
             sldgree = new Slider
             {
                 Minimum = 0,
                 Maximum = 255,
-                Value = 30,
+                Value = 0,
                 MinimumTrackColor = Color.Red,
                 MaximumTrackColor = Color.Black,
                 ThumbColor = Color.Red,
-                Margin = 20
+                //Margin = 20
             };
             sldgree.ValueChanged += Sldgree_ValueChanged;
             sldblu = new Slider
             {
                 Minimum = 0,
                 Maximum = 255,
-                Value = 30,
+                Value = 0,
                 MinimumTrackColor = Color.Red,
                 MaximumTrackColor = Color.Black,
                 ThumbColor = Color.Red,
-                Margin = 20
+                //Margin = 20
             }; 
             sldblu.ValueChanged += Sldblu_ValueChanged;
+
+            randombtn = new Button
+            {
+                Text = "Random Color",
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                BackgroundColor = Color.Tomato,
+                TextColor = Color.Black
+            };
+            randombtn.Clicked += Randombtn_Clicked;
             StackLayout st = new StackLayout
             {
-                Children = { fr, sldre, sldgree, sldblu }
+                Children = { fr, tere, sldre, tegree, sldgree, teblu, sldblu, randombtn }
             };
             Content = st;
-            
+            st.BackgroundColor = Color.PeachPuff;
+
         }
 
-        private void Sldblu_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void Randombtn_Clicked(object sender, EventArgs e)
         {
+            int rernd = rnd.Next(0, 255);
+            int greernd = rnd.Next(0, 255);
+            int blurnd = rnd.Next(0, 255);
+
+            sldre.Value = rernd;
+            sldgree.Value = greernd;
+            sldblu.Value = blurnd;
+
+            fr.BackgroundColor = Color.FromRgb(rernd, greernd, blurnd);
+        }
+
+        private void Sldblu_ValueChanged(object sender, ValueChangedEventArgs args)
+        {
+            if (sender == sldre)
+            {
+                tere.Text = String.Format("Red = {0:X2}", (int)args.NewValue);
+            }
+            else if (sender == sldgree)
+            {
+                tegree.Text = String.Format("Green = {0:X2}", (int)args.NewValue);
+            }
+            else if (sender == sldblu)
+            {
+                teblu.Text = String.Format("Blue = {0:X2}", (int)args.NewValue);
+            }
             fr.BackgroundColor = Color.FromRgb((int)sldre.Value, (int)sldgree.Value, (int)sldblu.Value);
         }
 
-        private void Sldgree_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void Sldgree_ValueChanged(object sender, ValueChangedEventArgs args)
         {
+            if (sender == sldre)
+            {
+                tere.Text = String.Format("Red = {0:X2}", (int)args.NewValue);
+            }
+            else if (sender == sldgree)
+            {
+                tegree.Text = String.Format("Green = {0:X2}", (int)args.NewValue);
+            }
+            else if (sender == sldblu)
+            {
+                teblu.Text = String.Format("Blue = {0:X2}", (int)args.NewValue);
+            }
             fr.BackgroundColor = Color.FromRgb((int)sldre.Value, (int)sldgree.Value, (int)sldblu.Value);
         }
 
-        private void Sldre_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void Sldre_ValueChanged(object sender, ValueChangedEventArgs args)
         {
+            if (sender == sldre)
+            {
+                tere.Text = String.Format("Red = {0:X2}", (int)args.NewValue);
+            }
+            else if (sender == sldgree)
+            {
+                tegree.Text = String.Format("Green = {0:X2}", (int)args.NewValue);
+            }
+            else if (sender == sldblu)
+            {
+                teblu.Text = String.Format("Blue = {0:X2}", (int)args.NewValue);
+            }
             fr.BackgroundColor = Color.FromRgb((int)sldre.Value, (int)sldgree.Value, (int)sldblu.Value);
         }
     }
