@@ -39,7 +39,7 @@ namespace MobileAppStart
                     new ColumnDefinition{Width=new GridLength(1,GridUnitType.Star)}
                 },
             };
-            gr.Children.Add(new BoxView { Color = Color.Blue }, 0, 0);
+            gr.Children.Add(new BoxView { Color = Color.Blue }, 0, 0);//(0-x,0-y)
             gr.Children.Add(new BoxView { Color = Color.Green }, 1, 0);
             gr.Children.Add(new BoxView { Color = Color.Red }, 0, 1);
             gr.Children.Add(new BoxView { Color = Color.YellowGreen }, 1, 1);

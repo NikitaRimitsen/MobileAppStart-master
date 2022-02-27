@@ -67,6 +67,12 @@ namespace MobileAppStart
                 BackgroundColor = Color.SandyBrown
             };
             rgbbtn.Clicked += Rgbbtn_Clicked;
+            Button ttt = new Button()
+            {
+                Text = "Trips traps trull",
+                BackgroundColor = Color.SandyBrown
+            };
+            ttt.Clicked += Ttt_Clicked;
 
             //st = {b,timer}
             st.Children.Add(b);
@@ -78,9 +84,15 @@ namespace MobileAppStart
             st.Children.Add(imgbtn);
             st.Children.Add(trafficbtn);
             st.Children.Add(rgbbtn);
+            st.Children.Add(ttt);
             st.BackgroundColor = Color.Cornsilk;
             Content = st;
             b.Clicked += B_Clicked;
+        }
+
+        private async void Ttt_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Blank_ttt());
         }
 
         private async void Rgbbtn_Clicked(object sender, EventArgs e)

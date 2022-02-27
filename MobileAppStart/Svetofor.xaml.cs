@@ -110,7 +110,7 @@ namespace MobileAppStart
                 Children = { red, yellow, green, knopki }
             };
 
-            //------------Кликать на box---------------
+            //------------Кликать на Frame---------------
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += Tap_Tapped;
             red.GestureRecognizers.Add(tap);
